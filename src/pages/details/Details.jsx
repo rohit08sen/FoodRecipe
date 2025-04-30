@@ -1,11 +1,16 @@
 import React, { useContext, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { GlobalContext } from '../../context/ItemContext'
+import Favorites from '../favorites/Favorites';
 
 function Details() {
   const { id} = useParams()//it will give everything here we need the id of each item
-  const { recipeDetailsData, setRecipeDetailsData, handleAddToFav } =
-    useContext(GlobalContext);
+  const {
+    recipeDetailsData,
+    setRecipeDetailsData,
+    handleAddToFav,
+    favoriteList,
+  } = useContext(GlobalContext);
  
   useEffect(() => {
     async function getRecipeDetails() {
@@ -41,7 +46,7 @@ function Details() {
           </h3>
           <div>
             <button
-              onClick={() => handleAddToFav}
+              onClick={() => handleAddToFav(recipeDetailsData?.recipe)}
               className="p-3 px-8 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block bg-black text-white"
             >
               Save as favorites
